@@ -17,7 +17,7 @@ A simple full-stack fundraising intern portal built as part of a Full Stack Deve
 - Leaderboard with dummy donation
 - Responsive Navbar with mobile toggle menu
 
-### Backend (Optional/Fake API)
+### Backend (Fake API)
 
 - Static JSON-based API using Next.js API routes
 - Mocked endpoints for intern data, reward and leaderboard
