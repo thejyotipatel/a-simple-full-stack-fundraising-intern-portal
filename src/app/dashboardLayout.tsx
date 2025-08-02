@@ -1,4 +1,5 @@
-import Navbar from '@/components/Navbar'
+'use client'
+import Navbar from '@/app/components/Navbar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

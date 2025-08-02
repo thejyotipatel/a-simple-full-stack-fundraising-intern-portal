@@ -1,5 +1,6 @@
 'use client'
 
+import { getLeaderboardData } from '@/app/lib/api'
 import { useEffect, useState } from 'react'
 
 type LeaderboardEntry = {
@@ -10,11 +11,17 @@ type LeaderboardEntry = {
 export default function Leaderboard() {
   const [leaderboards, setLeaderboards] = useState<LeaderboardEntry[]>([])
 
+  const fetchData = async () => {
+    try {
+      const leaderboardData = await getLeaderboardData()
+      setLeaderboards(leaderboardData)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+
   useEffect(() => {
-    // Fetch Leaderboard
-    fetch('/api/leaderboard')
-      .then((res) => res.json())
-      .then((data) => setLeaderboards(data.leaderboard))
+    fetchData()
   }, [])
 
   return (

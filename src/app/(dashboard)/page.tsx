@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import RewardCard from '@/components/RewardCard'
+import RewardCard from '@/app/components/RewardCard'
+import { getInternData, getRewardsData } from '@/app/lib/api'
 
 interface InternData {
   name: string
@@ -19,19 +20,22 @@ export default function DashboardPage() {
   const [rewards, setRewards] = useState<RewardsData[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    // Fetch intern details
-    fetch('/api/intern')
-      .then((res) => res.json())
-      .then((data) => {
-        setIntern(data)
-        setLoading(false)
-      })
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const internData = await getInternData()
+      const rewardsData = await getRewardsData()
+      setIntern(internData)
+      setRewards(rewardsData)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
-    // Fetch rewards
-    fetch('/api/rewards')
-      .then((res) => res.json())
-      .then((data) => setRewards(data.rewards))
+  useEffect(() => {
+    fetchData()
   }, [])
 
   return (

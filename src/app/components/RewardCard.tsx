@@ -1,3 +1,4 @@
+'use client'
 type RewardCardProps = {
   name: string
   tier?: 'bronze' | 'silver' | 'gold' | 'default'
